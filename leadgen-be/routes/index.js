@@ -106,10 +106,9 @@ router.post('/send-email',validate,roleAdmin,async(req,res)=>{
         lastName:leads[e].lastName,
         email:leads[e].email,
         subject:req.body.subject,
-        message1:req.body.message1,
-        message2:req.body.message2,
-        message3:req.body.message3,
+        message:req.body.message
       })
+      break;
     }
     res.status(200).send({
       message:"Email Campaing Sent Successfully",

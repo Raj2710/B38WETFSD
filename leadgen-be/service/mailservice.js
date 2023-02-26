@@ -1,9 +1,9 @@
 const sgMail = require('@sendgrid/mail')
 
-const MailService = async({email,subject,firstName,lastName,message1,message2,message3})=>{
-    sgMail.setApiKey('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')
+const MailService = async({email,subject,firstName,lastName,message})=>{
+    sgMail.setApiKey('jjj')
     const msg = {
-    to: `${email}`, // Change to your recipient
+    to: `nagarajansai2727@gmail.com`, // Change to your recipient
     from: 'nagarajansai2727@gmail.com', // Change to your verified sender
     subject: `${subject}`,
     text: 'and easy to do anywhere, even with Node.js',
@@ -14,15 +14,7 @@ const MailService = async({email,subject,firstName,lastName,message1,message2,me
     </div>
     <br>
     <div>
-        ${message1}    
-    </div>
-    <br>
-    <div>
-        ${message2}    
-    </div>
-    <br>
-    <div>
-        ${message3}    
+        ${message}    
     </div>
     <br>
     <footer style="text-align: center;">

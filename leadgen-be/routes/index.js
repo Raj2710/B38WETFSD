@@ -4,6 +4,7 @@ const {dbUrl} = require('../config/dbConfig')
 const mongoose = require('mongoose')
 const {LeadModel} = require('../schema/leadSchema')
 const {hashCompare,hashPassword,createToken,decodeToken,validate,roleAdmin} = require('../config/auth')
+const {MailService} = require('./../service/mailservice')
 mongoose.set('strictQuery',true)
 mongoose.connect(dbUrl)
 
@@ -98,9 +99,20 @@ router.get('/dashboard-list-items/:status',validate,roleAdmin,async(req,res)=>{
 router.post('/send-email',validate,roleAdmin,async(req,res)=>{
   try {
     let leads = await LeadModel.find({},{email:1,firstName:1,lastName:1})
+    for(e in leads)
+    {
+      await MailService({
+        firstName:leads[e].firstName,
+        lastName:leads[e].lastName,
+        email:leads[e].email,
+        subject:req.body.subject,
+        message1:req.body.message1,
+        message2:req.body.message2,
+        message3:req.body.message3,
+      })
+    }
     res.status(200).send({
       message:"Email Campaing Sent Successfully",
-      leads
     })
   } catch (error) {
     console.log(error)
